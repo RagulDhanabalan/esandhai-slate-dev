@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Vue.js - HTML</title>
+</head>
+
+<body>
+      <div>
+            <h3>Vue.js - HTML</h3>
+            <p>
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum facere
+                  quo sapiente id magni! Sint incidunt aut, expedita nesciunt est sequi
+                  animi accusamus soluta veritatis aperiam id reprehenderit dolores
+                  reiciendis? Repellendus, eum. Accusamus sit cumque totam laborum eum!
+                  Dolore corporis assumenda officia est, enim veritatis voluptatibus id
+                  quasi! Magni inventore excepturi cupiditate beatae rerum ad officiis
+                  saepe dolores assumenda cum.
+            </p>
+      </div>
+      <div id="app">
+            <div>
+                  <p>
+                        {{ greeting }}
+                        <strong>{{ name }}</strong>
+                  </p>
+                  <p>Click below to show an alert meassage !</p>
+                  <button>Click Here</button>
+                  <p>
+                        This is a random number : {{ 'Random Number : ' +
+                        Math.ceil(Math.random()*10) }}
+                  </p>
+            </div>
+            <div :class="vueClass">
+                  <p>Example for vue class using v-bind attribute</p>
+            </div>
+            <div v-bind:class="yellow">
+                  <p>This is a yellow text</p>
+            </div>
+            <div :class="greenBG">
+                  <p>This is an example for v-bind class using GREEN background color.</p>
+            </div>
+            <img :src="sampleImage" />
+            <img :src="sampleImage2" />
+            <div>
+                  <!-- using kebab-case -->
+                  <p :style="{fontSize: size+'px'}">
+                        Changing font-size using the style attribute in data
+                  </p>
+                  <p :style="{'font-size': size2+'px'}">
+                        Changing font-size using the style attribute in data
+                  </p>
+                  <p v-bind:style="{color: orange, fontSize: size2+'px'}">
+                        Changing COLOR using the style attribute in data
+                  </p>
+                  <p v-bind:style="{color: red, fontSize: size3+'px'}">
+                        Changing COLOR using the style attribute in data
+                  </p>
+            </div>
+            <div v-bind:style="{ backgroundColor: 'hsl('+bgVal + ',80%,80%)' }">
+                  Notice the background color on this div tag.
+            </div>
+            <div v-bind:style="{ 'background-color': 'hsl('+bgVal + ',80%,50%)' }">
+                  Notice the background color on this div tag.
+            </div>
+            <div v-bind:style="{ backgroundColor: isImportant ? 'lightcoral' : 'lightgreen' }">
+                  Conditional background color
+            </div>
+            <div>
+                  <p v-if="show">This is show1 true.</p>
+                  <p v-else>This is show1 false.</p>
+            </div>
+            <div>
+                  <p v-if="stock>5">This is show2 true.</p>
+                  <p v-else>This is show2 false.</p>
+            </div>
+            <div>
+                  <p v-if="text.includes('not')">It includes pizza</p>
+                  <p v-else>This not contains pizza.</p>
+            </div>
+            <div id="list">
+                  <ol>
+                        <li v-for="x in fruits">{{ x }}</li>
+                  </ol>
+            </div>
+            <div>
+                  <img v-for="x in manyFoods" v-bind:src="x" />
+            </div>
+            <div v-for="x in arrayImages">
+                  <!-- <figure v-for="x in arrayImages"> -->
+                  <img v-bind:src="x.url" alt="arrayImage" />
+                  <p>Product : {{x.name}}</p>
+                  <!-- </figure> -->
+            </div>
+            <!-- to know the index number of the images -->
+            <div>
+                  <figure v-for="(x, place) in arrayImages">
+                        <img :src="x.url" alt="manyFoods images" />
+                        <figcaption>{{ place }} : {{ x.name }}</figcaption>
+                  </figure>
+            </div>
+            <div class="lion">
+                  <img :src="lion_image" alt="lion_image" />
+                  <button v-on:click="Lion++" class="lionbtn">Add Lion</button>
+                  <p>{{'Lion Count is : ' + Lion }}</p>
+            </div>
+            <!-- bulb -->
+            <div class="bulb">
+                  <div id="lightDiv">
+                        <div v-show="lightOn"></div>
+                        <img src="assets/lightsvg.svg" />
+                  </div>
+                  <button class="lightbtn" v-on:click=" lightOn =! lightOn ">Switch light</button>
+                  <p>Click the button to turn ON / OFF the Light.</p>
+            </div>
+            <div class="input">
+                  <input type="text" v-on:input="inputCount++">
+                  <p>Input keystroke count is : {{ inputCount }}</p>
+            </div>
+            <div class="float">
+                  <h3>Left</h3>
+                  <h4 class="right" title="js">Right</h4>
+            </div>
+      </div>
+      <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+      <script>
+            const app = Vue.createApp({
+                  data() {
+                        return {
+                              name: "Ragul Dhanabalan",
+                              greeting: "Hello, ",
+                              vueClass: "class1",
+                              yellow: "class2",
+                              greenBG: "class3",
+                              sampleImage: "assets/bulb.jpg",
+                              sampleImage2: "assets/greenchillies.webp",
+                              size: 30,
+                              size2: 40,
+                              size3: 50,
+                              orange: "Orange",
+                              red: "red",
+                              bgVal: 180,
+                              isImportant: false,
+                              show: false,
+                              stock: 3,
+                              text: "not",
+                              fruits: [
+                                    "Apple",
+                                    "Orange",
+                                    "Grapes",
+                                    "Water melon",
+                                    "Pappaya",
+                                    "Lemon",
+                                    "Mango",
+                                    "Pomegranate",
+                              ],
+                              manyFoods: [
+                                    "assets/bigonion.jpg",
+                                    "assets/bulb.jpg",
+                                    "assets/corn2.jpg",
+                                    "assets/greenchillies.webp",
+                                    "assets/tomato.png",
+                              ],
+                              arrayImages: [
+                                    { name: "Big Onion", url: "assets/bigonion.jpg" },
+                                    { name: "Bulb", url: "assets/bulb.jpg" },
+                                    { name: "corn2", url: "assets/corn2.jpg" },
+                                    { name: "greenchillies", url: "assets/greenchillies.webp" },
+                                    { name: "Tomato", url: "assets/tomato.png" },
+                              ],
+                              Lion: 0,
+                              lion_image: "assets/lion.avif",
+                              lightOn: false,
+                              inputCount: 0,
+                        };
+                  },
+            });
+            app.mount("#app");
+      </script>
+      <style>
+            .class1 {
+                  border: 1px solid green;
+            }
+
+            .class2 {
+                  color: yellow;
+            }
+
+            .class3 {
+                  height: 60px;
+                  width: 500px;
+                  text-align: center;
+                  padding: 2px;
+                  background: green;
+            }
+
+            img {
+                  height: 250px;
+                  width: 300px;
+                  margin: 20px 20px 20px 40px;
+            }
+
+            .lion {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                  padding: 20px;
+                  border: 1px dashed black;
+                  background: rgb(238, 165, 234);
+            }
+
+            .lion img {
+                  height: 350px;
+                  width: 350px;
+            }
+
+            button {
+                  height: 40px;
+                  width: 80px;
+                  background: green;
+                  color: #fff;
+                  text-align: center;
+                  outline: none;
+                  border: none;
+            }
+
+            button:hover {
+                  background: rgb(1, 109, 1);
+                  cursor: pointer;
+            }
+
+            .lion p {
+                  color: #fff;
+                  font-size: 30px;
+            }
+
+            .bulb {
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  height: 300px;
+                  width: 450px;
+                  margin: auto;
+                  padding: 15px;
+                  border: 1px dashed black;
+            }
+
+            #lightDiv {
+                  position: relative;
+                  width: 150px;
+                  height: 150px;
+            }
+
+            #lightDiv>img {
+                  position: relative;
+                  width: 100%;
+                  height: 100%;
+            }
+
+            #lightDiv>div {
+                  position: absolute;
+                  top: 17%;
+                  left: 45%;
+                  width: 64%;
+                  height: 64%;
+                  border-radius: 50%;
+                  background-color: yellow;
+            }
+
+            .lightbtn {
+                  margin-top: 50px;
+                  margin-left: 40px;
+            }
+
+            .right {
+                  float: right;
+            }
+
+            .float {
+                  height: 100px;
+                  width: 450px;
+                  padding: 10px;
+                  border: 1px solid red;
+            }
+      </style>
+</body>
+
+</html>
